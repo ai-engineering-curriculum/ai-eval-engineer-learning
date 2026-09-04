@@ -1,22 +1,56 @@
-# mod-112-owning-an-ai-eval-program: Owning an AI Evaluation Program Across Product, Infra, Safety, and Governance
-
-> Scaffolded by `aicg org execute-plan`. Lecture chapters and exercise content are authored on subsequent autonomous cycles.
+# mod-112 — Owning an AI Evaluation Program Across Product, Infra, Safety, and Governance
 
 **Estimated effort:** 12 hours
 
+This is the twelfth and terminal module of the AI Evaluation Engineer track. Mod-101 through mod-111 built the practitioner surfaces — trace instrumentation, trajectory eval, LLM-as-judge, RAG eval, the CI gate, the online loop, the safety report, human review, the platform slice, and the cost / latency / quality trade-off report. This module builds the **program-owner posture** those eleven surfaces feed into: the release-gate architecture the whole product portfolio uses, the delegation contracts that keep six peer teams working *with* the eval program rather than around it, the build-vs-buy platform decisions that decide whether the eval stack is an org asset or an ongoing tax, the incident-driven investment loop that turns every production regression into permanent coverage, the product-side card slice the governance peer folds into the org-wide card, and the framework mapping the auditor walks through.
+
+The module deliberately does not own **governance itself** (owned by the peer track: `ai-evaluation-engineer` at Governance L25 and `ai-governance-analyst`), **model-altitude evaluation** (owned by `model-evaluation-engineer` at L30), or **fleet-altitude serving** (owned by `ai-infra-performance`). It produces evidence in shapes those peers consume, and it delegates cleanly at the boundaries. Chapter 03 formalises the delegation as machine-readable contracts.
+
 ## Learning objectives
 
-- Translate a product roadmap into a release-gate architecture for one or more AI application surfaces, with explicit thresholds and rollback criteria
-- Author delegation contracts to peer specialists: `model-evaluation-engineer` (model-eval methodology depth), `ai-risk-engineer` (harm models & red-team data), `ai-evaluation-engineer` / `ai-governance-analyst` (release-assurance & regulator interface), `ai-infra-security` (adversarial-eval & judge supply-chain), `ai-infra-mlops` / `ai-infra-ml-platform` (CI and platform integration)
-- Make the build-vs-buy decision across app-eval platforms (Weave, Phoenix, Langfuse, Braintrust, Promptfoo, DeepEval, RAGAS, Humanloop, Galileo, Patronus, Vertex Eval, Bedrock Eval, Azure AI Foundry Eval) with cost, data-residency, extensibility, and vendor-lock trade-offs explicit
-- Run incident-driven eval investment: turn a real production incident into a permanent regression fixture, an alert, and a runbook update
-- Compose a product-side model / system card slice from the eval evidence that satisfies internal review and hands cleanly to the governance-family peer
-- Map the program to NIST AI RMF Measure/Manage, EU AI Act general-purpose AI model provider obligations, and ISO/IEC 42001 controls — knowing that governance shape is owned by `ai-evaluation-engineer` (peer, Governance family, level 25) and by `ai-governance-analyst`
+- Translate a product roadmap into a **release-gate architecture** for one or more AI application surfaces, with explicit thresholds and rollback criteria.
+- Author **delegation contracts** to peer specialists — `model-evaluation-engineer` (model-eval methodology depth), `ai-risk-engineer` (harm models & red-team data), `ai-evaluation-engineer` (peer, Governance L25) / `ai-governance-analyst` (release-assurance & regulator interface), `ai-infra-security` (adversarial-eval & judge supply-chain), `ai-infra-mlops` / `ai-infra-ml-platform` (CI and platform integration).
+- Make the **build-vs-buy decision** across app-eval platforms (Weave, Phoenix, Langfuse, Braintrust, Promptfoo, DeepEval, RAGAS, Humanloop, Galileo, Patronus, Vertex AI Evaluation, Bedrock Evaluations, Azure AI Foundry Evaluations) with cost, data-residency, extensibility, and vendor-lock trade-offs explicit.
+- Run **incident-driven eval investment**: turn a real production incident into a permanent regression fixture, an alert, and a runbook update.
+- Compose a **product-side model / system card slice** from the eval evidence that satisfies internal review and hands cleanly to the governance-family peer.
+- Map the program to **NIST AI RMF** Measure / Manage, **EU AI Act** high-risk system and GPAI provider obligations, and **ISO/IEC 42001** controls — knowing that governance shape is owned by `ai-evaluation-engineer` (peer, Governance family, level 25) and by `ai-governance-analyst`.
 
-## Structure
+## Lecture chapters
 
-- `01-…md` … `0N-…md`: lecture chapters.
-- `exercises/`: per-exercise prompts.
-- `labs/`: long-form hands-on labs.
-- `quizzes/`: knowledge checks.
-- `resources.md`: external references.
+1. [Why owning an AI evaluation program](01-why-owning-an-ai-eval-program.md) — the program-owner posture the previous eleven modules feed into; the plane analogy extended upward (program altitude above app altitude); six load-bearing surfaces (release-gate architecture, delegation contracts, build-vs-buy matrix, incident investment loop, card slice, framework mapping); six vocabulary terms (**app surface family**, **release gate**, **delegation contract**, **program artefact**, **investment ledger**, **card slice**); the three failure shapes the module prevents (ad-hoc gate, sprawl, platform churn); the delegation triangle to the model-altitude and governance peers.
+2. [Release-gate architecture for one app family](02-release-gate-architecture-for-one-app-family.md) — a gate is a contract (specific artefact, specific threshold, specific outcome); the four-gate topology (offline, canary, ramp, post-ship); the gate map per surface × change class; threshold provenance (incumbent-relative, product-committed, safety-mandated, regulator-derived); rollback criteria paired to every threshold; the policy as a signed document with quarterly refresh cadence; the waiver / emergency-path discipline.
+3. [Delegation contracts with peer specialists](03-delegation-contracts-with-peer-specialists.md) — the six peer contracts (`model-evaluation-engineer`, `ai-risk-engineer`, `ai-evaluation-engineer` peer + `ai-governance-analyst`, `ai-infra-security`, `ai-infra-mlops` / `ai-infra-ml-platform`); the eight-section anatomy (header, scope, what the peer produces, what the eval program produces, interface channels, escalation, bootstrap state, review cadence); the bootstrap-state clause for young orgs; the quarterly review that produces a versioned diff.
+4. [Build-vs-buy eval platform matrix](04-build-vs-buy-eval-platform-matrix.md) — decompose the eval stack into ten components; score each on six axes (cost of ownership, data residency, extensibility, vendor lock-in, integration fit, operational maturity); three answers per component (build / buy / hybrid); the vendor short-list with not-picked-because lines; the annual full refresh + quarterly status check + trigger-driven review cadence; data-residency and extensibility depth.
+5. [Incident-driven eval investment](05-incident-driven-eval-investment.md) — every P0 / P1 incident produces three permanent artefacts (regression fixture, online alert, runbook diff) tracked in the **investment ledger**; the retrospective enqueue moment; the fixture construction pattern (3 – 10 cases + paired controls, verified against pre-fix and post-fix code); the alert construction pattern (mod-107 metric + scope + threshold + window + action + runbook + grace period); the runbook diff pattern; the monthly ledger review; the root-cause-class taxonomy that makes the ledger queryable.
+6. [Product-side model / system card slice](06-product-side-model-card-slice.md) — the slice is the eval-program contribution to the org-wide card (the peer owns the whole card); eight typical sections; **generator-based, never hand-authored**; the Mitchell 2019 shape and provider-published references (Anthropic, OpenAI, Google DeepMind, Meta); the monthly regeneration cadence; the "handed cleanly to the governance peer" contract (well-known path, schema fit, deterministic + timestamped, zero rewrites); audience-tagged sections.
+7. [Governance mapping: NIST AI RMF, EU AI Act, ISO/IEC 42001](07-governance-mapping-nist-eu-iso.md) — the eval program owns the mapping (not the compliance stance); one row per (artefact, provision) pair with residual gap column; headline maps for NIST Measure/Manage, EU AI Act Articles 9 – 15 / 61 – 73 / 51 – 55 GPAI, ISO/IEC 42001 clauses 6 – 10; quarterly refresh cadence; framework-refresh tracking via the governance peer; the mapping as the primary audit artefact.
+
+## Exercises
+
+Each exercise builds one of the load-bearing program artefacts. Do them in order — the release-gate architecture from exercise 01 is the substrate every subsequent artefact composes over.
+
+1. [Release-gate architecture for one app family](exercises/exercise-01-release-gate-architecture-for-one-app-family.md) — pick one app surface family; author the four-gate architecture (offline, canary, ramp, post-ship) with per-surface gate map, thresholds with provenance, rollback criteria; publish as a signed policy document with runbooks and quarterly-refresh cadence.
+2. [Delegation contracts with peer specialists](exercises/exercise-02-delegation-contracts-with-peer-specialists.md) — author the six peer contracts using the eight-section anatomy; bind each contract's artefact list to a downstream chapter (release-gate, investment ledger, card slice, framework mapping); document bootstrap state honestly.
+3. [Build-vs-buy eval platform matrix](exercises/exercise-03-build-vs-buy-eval-platform-matrix.md) — decompose the eval-platform stack into components; score each on the six axes; author the vendor short-list per component with not-picked-because lines; publish as a signed matrix with rollback triggers and a refresh cadence.
+4. [Incident-to-regression-fixture walkthrough](exercises/exercise-04-incident-to-regression-fixture-walkthrough.md) — take one real (or realistic) incident on a surface in scope; run the retrospective enqueue; author the three permanent artefacts (fixture, alert, runbook diff); land the row on the investment ledger; verify the fixture against pre-fix and post-fix code.
+5. [Product-side model card slice](exercises/exercise-05-product-side-model-card-slice.md) — author the card-slice generator for one app surface family; produce the eight-section slice; land the slice at the well-known path the governance peer's card-assembly pipeline reads; run the quarterly slice-diff review.
+
+## Labs and quizzes
+
+- Labs (see [`labs/`](labs)) build the end-to-end program artefact set on top of the mod-110 platform slice: the release-gate architecture, the delegation-contract set, the build-vs-buy matrix, the investment-ledger machinery, the card-slice generator, and the framework mapping — with the quarterly and monthly ceremonies wired up. Authored under the autonomous fill-in loop.
+- Quizzes (see [`quizzes/`](quizzes)) verify the vocabulary — the six terms, the four-gate topology, the eight-section delegation-contract anatomy, the ten-component platform decomposition, the three-artefact investment loop, the eight-section card-slice shape, and the three-framework mapping headline. Authored under the autonomous fill-in loop.
+
+## Resources
+
+External references are curated in [`resources.md`](resources.md).
+
+## Where this module hands off
+
+- **The Governance-family peers** (`ai-evaluation-engineer` at L25 for release-assurance framework authoring; `ai-governance-analyst` for org-wide policy, third-party attestations, regulator interface) consume the card slice (chapter 06), the framework mapping (chapter 07), the release-gate outcome ledger (chapter 02), and incident-adjacent evidence bundles (chapter 05). Chapter 03's delegation contracts (§3 and §4) formalise the shape.
+- **The `model-evaluation-engineer` peer** (Model-Development family, L30) consumes cohort regression reports and judge-overlap results and produces capability profiles + judge-overlap diagnostics + model-swap regression coverage plans. Chapter 03's delegation contract (§1) formalises the shape.
+- **The `ai-risk-engineer` peer** (Governance family, L30) consumes product-surface impact analyses and exposure attribution and produces harm-model refreshes, adversary personas, red-team corpora, and dangerous-capability escalation signals. Chapter 03's delegation contract (§2) formalises the shape.
+- **The `ai-infra-security` peer** consumes safety findings and judge-supply-chain requirements and produces adversarial-eval isolation, supply-chain policy, trace-storage controls, and attack-signal enrichment. Chapter 03's delegation contract (§5) formalises the shape.
+- **The `ai-infra-mlops` / `ai-infra-ml-platform` peers** consume gate policy bindings, storage-shape requirements, and SLO expectations and produce CI integration, canary / ramp machinery, trace collection, and deployment-lineage services. Chapter 03's delegation contract (§6) formalises the shape.
+- **The mod-110 platform slice** is the substrate every program artefact reads from and writes to. If the slice is not yet in place, this module's exercises can still run against smaller substitutes (CSV + Postgres); the shapes are the same.
+
+The track ends here. The seven chapters together are the program-owner posture that turns eleven modules of practitioner work into an eval program a director defends at business review, a peer specialist contracts with, an auditor walks through, and a regulator reads.

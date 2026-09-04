@@ -2,60 +2,51 @@
 
 **Role level:** 30 (deep specialist, AI Engineering family — peer to `model-evaluation-engineer` on the ML Engineering ladder and to `senior-ml-engineer` at the same level)
 **Track:** `ai-eval-engineer-learning`
-**Research window:** 2026-04-09 → 2026-07-08 (last 90 days)
-**Today:** 2026-07-08
+**Research window:** 2026-06-06 → 2026-09-04 (last 90 days)
+**Today:** 2026-09-04
 
-This file documents the requirements catalog used to seed the AI Evaluation Engineer curriculum. Raw normalized data lives in [`.aicg/job-requirements.json`](.aicg/job-requirements.json); the planned curriculum lives in [`.aicg/curriculum-plan.json`](.aicg/curriculum-plan.json).
+This file documents the requirements catalog used to seed the AI Evaluation Engineer curriculum. Raw normalized data lives in [`.aicg/job-requirements.json`](.aicg/job-requirements.json); the planned curriculum lives in [`.aicg/curriculum-plan.json`](.aicg/curriculum-plan.json); the proposed per-cycle delta (empty this cycle — see rationale below) lives in [`.aicg/curriculum-plan-delta.json`](.aicg/curriculum-plan-delta.json).
 
-## Status — bootstrap session, postings deferred
+## Status — live posting evidence backfilled
 
-<!-- needs-research: collect ≥25 distinct in-window postings titled "AI Evaluation Engineer" / "LLM Evaluation Engineer" / "GenAI Evaluation Engineer" / "AI Quality Engineer" / "AI Test Engineer" / "Applied AI Evaluation Engineer" / "AI Application Evaluation Engineer" / "Agentic AI Evaluation Engineer" / "AI Product Evaluation Engineer" / "Evaluation Engineer (LLM / GenAI)". Filter OUT "Senior / Staff / Principal" modifiers (those inherit this packet), generic "ML Engineer / Data Scientist / Research Scientist" titles (owned by ml-engineer / senior-ml-engineer / research-scientist peers), and postings whose emphasis is benchmark-construction methodology, statistical rigour, or cross-modality model-eval architecture (those belong to `model-evaluation-engineer`, the peer level-30 specialist in the ML Engineering family). Re-validate every requirement against the live evidence and demote any whose evidence stays empty. -->
+This cycle sampled **26 in-window postings** across the equivalent title cluster (`AI Evaluation Engineer`, `LLM Evaluation Engineer`, `AI Eval Engineer`, `Agent Evaluation Engineer`, `AI QA Engineer` / `AI Quality Engineer`, `GenAI Evaluation Engineer`, `LLM / Agentic Evaluation Rig Engineer`, `Software Engineer (Evals)`, `AI Engineer - Evaluations`, and a `User Researcher, AI Evaluations` variant). Sources spanned Greenhouse, Ashby, Lever, Wellfound, Built In, SmartRecruiters, and direct-employer career sites. Frontier-lab pre-training / benchmark-construction and pure governance / regulator-facing postings were rejected per the ownership rule and routed to the peer specialist tracks (`model-evaluation-engineer`, `ai-evaluation-engineer` level 25 Governance).
 
-This packet was authored in a bootstrap session **without an exercised WebSearch / WebFetch pass against live job boards** (WebSearch permission was not granted in-session). Per the project rules (*"Do not invent facts, incidents, or salary figures. Cite sources."*), the `postings` array in [`.aicg/job-requirements.json`](.aicg/job-requirements.json) is intentionally empty — the curriculum will not claim to have analysed 25 live postings when none were fetched.
+**Every one of the 12 existing modules received posting evidence.** No requirement theme that surfaced in the sample crosses the 30% frequency threshold *without already being covered* by an existing module. Per the continuity-bias rule (`Default to no change`), [`.aicg/curriculum-plan-delta.json`](.aicg/curriculum-plan-delta.json) is empty this cycle.
 
-The autonomous research loop is expected to fill that gap on its next cycle. To keep the loop deterministic and to give the curriculum a defensible baseline in the meantime, this document grounds the requirements catalog in **authoritative public references** that publish what the role is hired against:
-
-- **Application-layer LLM/agent eval frameworks and platforms** — [Arize Phoenix](https://docs.arize.com/phoenix), [Langfuse](https://langfuse.com/docs), [W&B Weave](https://weave-docs.wandb.ai/), [Braintrust](https://www.braintrust.dev/docs/start), [LangSmith](https://docs.smith.langchain.com/), [Promptfoo](https://www.promptfoo.dev/docs/intro/), [DeepEval](https://docs.confident-ai.com/), [RAGAS](https://docs.ragas.io/), [TruLens](https://www.trulens.org/), [Humanloop](https://humanloop.com/docs), [Galileo](https://docs.galileo.ai/), [Patronus](https://docs.patronus.ai/), and the AISI [Inspect](https://inspect.aisi.org.uk/) agent harness — these are the concrete tools the role is expected to wield in postings.
-- **Observability conventions** — [OpenTelemetry Gen-AI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/), [OpenInference span attributes](https://github.com/Arize-ai/openinference).
-- **Agent evaluation research** — MT-Bench / Chatbot Arena ([arXiv:2306.05685](https://arxiv.org/abs/2306.05685)), G-Eval ([arXiv:2303.16634](https://arxiv.org/abs/2303.16634)), Prometheus 2 ([arXiv:2405.01535](https://arxiv.org/abs/2405.01535)), SWE-bench ([arXiv:2310.06770](https://arxiv.org/abs/2310.06770)) + [SWE-bench Verified](https://openai.com/index/introducing-swe-bench-verified/), WebArena ([arXiv:2307.13854](https://arxiv.org/abs/2307.13854)), τ-bench ([arXiv:2406.12045](https://arxiv.org/abs/2406.12045)), ToolBench ([arXiv:2307.16789](https://arxiv.org/abs/2307.16789)), [Berkeley Function-Calling Leaderboard](https://gorilla.cs.berkeley.edu/leaderboard.html), AgentBench ([arXiv:2308.03688](https://arxiv.org/abs/2308.03688)), GAIA ([arXiv:2311.12983](https://arxiv.org/abs/2311.12983)), RAGAS ([arXiv:2309.15217](https://arxiv.org/abs/2309.15217)).
-- **App-side safety and prompt-injection research** — HarmBench ([arXiv:2402.04249](https://arxiv.org/abs/2402.04249)), AgentDojo ([arXiv:2406.13352](https://arxiv.org/abs/2406.13352)), InjecAgent ([arXiv:2403.02691](https://arxiv.org/abs/2403.02691)), AIR-Bench 2024 ([arXiv:2407.17436](https://arxiv.org/abs/2407.17436)), SafetyBench ([arXiv:2309.07045](https://arxiv.org/abs/2309.07045)), Llama Guard ([arXiv:2312.06674](https://arxiv.org/abs/2312.06674)), GCG ([arXiv:2307.15043](https://arxiv.org/abs/2307.15043)).
-- **App-side guardrails and moderation** — [NVIDIA NeMo Guardrails](https://docs.nvidia.com/nemo/guardrails/), [Guardrails AI](https://www.guardrailsai.com/docs), [Meta Llama Guard / Purple Llama](https://ai.meta.com/research/publications/llama-guard-llm-based-input-output-safeguard-for-human-ai-conversations/), [OpenAI Moderation](https://platform.openai.com/docs/guides/moderation), [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/), [MITRE ATLAS](https://atlas.mitre.org/), [Google SAIF](https://safety.google/cybersecurity-advancements/saif/).
-- **Statistical methodology (link-out, not depth)** — Efron ([1979 bootstrap](https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.full)), Benjamini-Hochberg ([1995 FDR](https://www.jstor.org/stable/2346101)), Deng et al. ([2013 CUPED](https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf)), Howard et al. ([2018 confidence sequences](https://arxiv.org/abs/1810.08240)), [Kohavi/Tang/Xu (2020 Trustworthy Online Controlled Experiments)](https://www.cambridge.org/9781108724265).
-- **Governance / release-gate references (link-out)** — [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), [NIST AI RMF Generative AI Profile (AI 600-1)](https://airc.nist.gov/AI_RMF_Knowledge_Base/AI_RMF/Uses/GenAI-Profile), [EU AI Act (Regulation 2024/1689)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj), [ISO/IEC 42001:2023](https://www.iso.org/standard/81230.html), [ISO/IEC 25059](https://www.iso.org/standard/80655.html), [Mitchell et al. Model Cards](https://arxiv.org/abs/1810.03993), public OpenAI system cards, public Anthropic Claude model card disclosures.
-- **Managed-eval build-vs-buy references** — [Vertex AI Gen AI Evaluation](https://cloud.google.com/vertex-ai/generative-ai/docs/models/evaluation-overview), [AWS Bedrock Model Evaluation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html), [Azure AI Foundry Evaluation SDK](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/develop/evaluate-sdk).
-
-Every requirement below cites at least one such reference, and every requirement is shaped so that posting-frequency evidence can be added underneath it without restructure.
+Ashby- and Lever-hosted ATS pages are JavaScript-rendered and returned only partial content to `WebFetch`. For those postings, the record in `.aicg/job-requirements.json` carries a short representative quote (from the ATS search-result card) and null verbatim bullets. The verbatim required/preferred bullets were fully extracted for the 10 postings hosted on Greenhouse, Built In, Cursor's careers site, and OpenTrain — which is enough evidence to validate the theme mapping. Next cycle should try headless-browser rendering for the Ashby / Lever cohort.
 
 ## Methodology
 
-1. Sourced the canonical task domains for a deep-specialist AI-application evaluation engineer from the public references catalogued in `.aicg/job-requirements.json → authoritative_references`.
-2. Mapped each task domain to (a) the role on our level ladder that should own it primarily and (b) the curriculum module that will cover it.
-3. Applied the **ownership rule** — assign coverage to the lowest-level role that genuinely requires the skill; higher-level tracks link back rather than duplicate. In particular, deferred:
+1. Sampled ≥25 in-window postings (2026-06-06 → 2026-09-04) across the title cluster, spanning ATS aggregators (Greenhouse, Ashby, Lever, Wellfound, SmartRecruiters, Built In) and direct-employer career sites.
+2. For each posting, captured `employer / title / URL / date_observed / date_posted / location / verbatim required bullets / verbatim preferred bullets / salary_range / one representative quote` into [`.aicg/job-requirements.json → postings`](.aicg/job-requirements.json). For JS-rendered ATS pages where bullets were not extractable, the record kept the quote and marked bullet fields null with a note.
+3. Attributed each posting to one or more `req-*` requirements via `requirement_evidence_for`.
+4. Computed observed frequency per requirement as `distinct postings citing / total postings sampled (26)`.
+5. Applied the **ownership rule** — assign coverage to the lowest-level role that genuinely requires the skill; higher-level tracks link back rather than duplicate. Deferred:
    - *Down* to `ml-engineer` (level 20) for classical ML fundamentals; to `llm-application-developer` / `rag-engineer` / `agentic-ai-engineer` (peer AI Engineering tracks) for the systems being evaluated.
    - *Sideways* to `model-evaluation-engineer` (peer, level 30, ML Engineering family) for statistical methodology depth, benchmark-construction depth, judge-vs-human calibration methodology depth, cross-modality model-eval methodology, and MLPerf-style serving benchmarks.
    - *Sideways* to `ai-evaluation-engineer` (peer, level 25, Governance family) for the release-assurance / audit-trail / regulator-facing shape.
    - *Sideways* to `ai-risk-engineer` (peer, level 30) for alignment-risk methodology, harm modelling, and red-team data generation.
    - *Up* to `staff-ml-engineer` / `principal-ml-engineer` / `senior-agentic-ai-engineer` / `agentic-systems-architect` / `head-of-ai-governance` / `ai-infra-security` for the leadership, architectural, and deep-security scopes that inherit this packet.
-4. Flagged everything that has not yet been validated against in-window postings so the next cycle can demote any requirement whose evidence stays empty.
+6. Applied the **continuity-bias rule** — a new module / exercise is only warranted when ≥3 distinct postings cite a requirement the existing curriculum does *not* cover AND observed frequency is ≥ 0.30 AND no existing module can be incrementally extended. No theme in this sample met all three conditions.
 
 ## Requirement themes → curriculum ownership
 
-The table below lists each requirement theme, its planned owner per the level hierarchy, and the curriculum coverage path. **Freq** is intentionally blank for this cycle — it will be backfilled by the next research pass.
+Frequency (`Freq`) is the share of the 26 sampled postings that cite the theme. Themes owned elsewhere are listed for routing purposes and have no observed frequency here.
 
 | # | Theme | Freq | Owner role | Coverage |
 |---|---|---|---|---|
-| 1 | Product-shaped eval foundations: SLO mapping, offline vs. online split, deferring statistical depth | <!-- needs-research --> | `ai-eval-engineer` (this) | [`mod-101-product-shaped-eval-foundations`](lessons/mod-101-product-shaped-eval-foundations) |
-| 2 | Trace instrumentation for LLM apps and agents (OpenTelemetry / OpenInference, Phoenix / Langfuse / Weave / Braintrust / LangSmith) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-102-trace-instrumentation`](lessons/mod-102-trace-instrumentation) |
-| 3 | Trajectory & tool-call eval for production agents (Inspect harness, SWE-bench Verified / τ-bench / WebArena / GAIA / BFCL / ToolBench shapes) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-103-trajectory-and-tool-eval`](lessons/mod-103-trajectory-and-tool-eval) |
-| 4 | LLM-as-judge in product pipelines: rubric design, bias controls, judge-tier routing, judge-drift, quick calibration | <!-- needs-research --> | `ai-eval-engineer` | [`mod-104-llm-as-judge-in-product`](lessons/mod-104-llm-as-judge-in-product) |
-| 5 | RAG evaluation at the application layer (RAGAS / TruLens / DeepEval; RAG-triad; retrieval vs generation split) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-105-rag-eval-app-layer`](lessons/mod-105-rag-eval-app-layer) |
-| 6 | Eval-gated CI/CD for prompts, chains, and agents (Promptfoo / DeepEval / Braintrust / Weave / Langfuse in CI) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-106-eval-gated-cicd`](lessons/mod-106-eval-gated-cicd) |
-| 7 | Online evaluation & regression detection (sampled traces, drift, canary / shadow, sequential monitoring) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-107-online-eval-and-regression`](lessons/mod-107-online-eval-and-regression) |
-| 8 | App-side safety & guardrails eval (jailbreak on surface, prompt-injection, tool abuse, guardrail effectiveness, OWASP LLM Top 10) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-108-app-safety-and-guardrails-eval`](lessons/mod-108-app-safety-and-guardrails-eval) |
-| 9 | Human review workflows integrated with product feedback (Argilla / Label Studio, expert reviewers, product feedback loops) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-109-human-review-workflows`](lessons/mod-109-human-review-workflows) |
-| 10 | Eval-data-platform slice: trace warehouse, dataset lineage, multi-runner orchestration, eval-as-a-service | <!-- needs-research --> | `ai-eval-engineer` | [`mod-110-eval-data-platform-slice`](lessons/mod-110-eval-data-platform-slice) + [`project-103`](projects/project-103-ai-eval-platform-slice) |
-| 11 | Cost / latency / quality trade-off eval (model routing, distillation regression, token / TTFT / TPOT at app altitude) | <!-- needs-research --> | `ai-eval-engineer` | [`mod-111-cost-latency-quality-tradeoff`](lessons/mod-111-cost-latency-quality-tradeoff) |
-| 12 | Owning an AI eval program: release-gate architecture, cross-team delegation, build-vs-buy, incident-driven investment | <!-- needs-research --> | `ai-eval-engineer` | [`mod-112-owning-an-ai-eval-program`](lessons/mod-112-owning-an-ai-eval-program) |
+| 1 | Product-shaped eval foundations: SLO mapping, offline vs. online split, deferring statistical depth | 0.54 | `ai-eval-engineer` (this) | [`mod-101-product-shaped-eval-foundations`](lessons/mod-101-product-shaped-eval-foundations) |
+| 2 | Trace instrumentation for LLM apps and agents (OpenTelemetry / OpenInference, Phoenix / Langfuse / Weave / Braintrust / LangSmith) | 0.15 | `ai-eval-engineer` | [`mod-102-trace-instrumentation`](lessons/mod-102-trace-instrumentation) |
+| 3 | Trajectory & tool-call eval for production agents (Inspect harness, SWE-bench Verified / τ-bench / WebArena / GAIA / BFCL / ToolBench shapes) | 0.38 | `ai-eval-engineer` | [`mod-103-trajectory-and-tool-eval`](lessons/mod-103-trajectory-and-tool-eval) |
+| 4 | LLM-as-judge in product pipelines: rubric design, bias controls, judge-tier routing, judge-drift, quick calibration | 0.31 | `ai-eval-engineer` | [`mod-104-llm-as-judge-in-product`](lessons/mod-104-llm-as-judge-in-product) |
+| 5 | RAG evaluation at the application layer (RAGAS / TruLens / DeepEval; RAG-triad; retrieval vs generation split) | 0.23 | `ai-eval-engineer` | [`mod-105-rag-eval-app-layer`](lessons/mod-105-rag-eval-app-layer) |
+| 6 | Eval-gated CI/CD for prompts, chains, and agents (Promptfoo / DeepEval / Braintrust / Weave / Langfuse in CI) | 0.58 | `ai-eval-engineer` | [`mod-106-eval-gated-cicd`](lessons/mod-106-eval-gated-cicd) |
+| 7 | Online evaluation & regression detection (sampled traces, drift, canary / shadow, sequential monitoring) | 0.38 | `ai-eval-engineer` | [`mod-107-online-eval-and-regression`](lessons/mod-107-online-eval-and-regression) |
+| 8 | App-side safety & guardrails eval (jailbreak on surface, prompt-injection, tool abuse, guardrail effectiveness, OWASP LLM Top 10) | 0.19 | `ai-eval-engineer` | [`mod-108-app-safety-and-guardrails-eval`](lessons/mod-108-app-safety-and-guardrails-eval) |
+| 9 | Human review workflows integrated with product feedback (Argilla / Label Studio, expert reviewers, product feedback loops) | 0.19 | `ai-eval-engineer` | [`mod-109-human-review-workflows`](lessons/mod-109-human-review-workflows) |
+| 10 | Eval-data-platform slice: trace warehouse, dataset lineage, multi-runner orchestration, eval-as-a-service | 0.58 | `ai-eval-engineer` | [`mod-110-eval-data-platform-slice`](lessons/mod-110-eval-data-platform-slice) + [`project-103`](projects/project-103-ai-eval-platform-slice) |
+| 11 | Cost / latency / quality trade-off eval (model routing, distillation regression, token / TTFT / TPOT at app altitude) | 0.12 | `ai-eval-engineer` | [`mod-111-cost-latency-quality-tradeoff`](lessons/mod-111-cost-latency-quality-tradeoff) |
+| 12 | Owning an AI eval program: release-gate architecture, cross-team delegation, build-vs-buy, incident-driven investment | 0.31 | `ai-eval-engineer` | [`mod-112-owning-an-ai-eval-program`](lessons/mod-112-owning-an-ai-eval-program) |
 | 13 | Classical ML / PyTorch / sklearn-eval / packaging fundamentals | n/a — prerequisite | `ml-engineer` (level 20) | Listed in [`PREREQUISITES.md`](PREREQUISITES.md); not re-taught |
 | 14 | LLM application development (prompting, tool design, chain orchestration) | n/a — peer track | `llm-application-developer` (level 25) | Linked out; this curriculum evaluates what that role builds |
 | 15 | RAG system engineering (chunking, embeddings, rerankers) | n/a — peer track | `rag-engineer` (level 25) | mod-105 covers RAG *eval*; RAG engineering linked out |
@@ -65,31 +56,52 @@ The table below lists each requirement theme, its planned owner per the level hi
 | 19 | Alignment-risk methodology / harm modelling / red-team data generation | n/a — peer specialist | `ai-risk-engineer` (level 30) | mod-108 measures; harm-model design linked out |
 | 20 | Post-training (SFT / PEFT / RLHF / DPO) depth | n/a — peer specialist | `fine-tuning-engineer` (level 30) | Out of scope — this curriculum evaluates the outputs |
 | 21 | Distributed training PLATFORM engineering | n/a — peer track | `training-pipeline-engineer` (level 25) | Out of scope |
-| 22 | Deep ML/AI security (model extraction, eval-set exfiltration, judge supply-chain attacks) | n/a — higher level | `ai-infra-security-learning` (level 35) | Awareness in mod-108 and mod-110; depth owned upstream |
+| 22 | Deep ML/AI security (model extraction, eval-set exfiltration, judge supply-chain attacks) | n/a — higher level | `ai-infra-security-learning` (level 35) | Awareness in mod-108 and mod-110; depth owned upstream. Anthropic Cyber Evaluations Engineer posting is the closest in-window example |
 | 23 | Compliance / model-card review / regulated-data review depth | n/a — peer track | `ai-governance-analyst` (level 25) | Awareness in mod-112; depth owned upstream |
+
+## Themes that fell BELOW the 0.30 threshold — do not add
+
+The following themes appeared in the sample but stayed under the 30% frequency threshold that would justify new content. Each is already partially covered by an existing module and is retained here for the next cycle to re-check.
+
+- **Simulated-user / rollout environments** — Hippocratic AI ("agent harnesses or simulation environments"), Precept Labs ("evaluation harnesses"), Cursor ("curated datasets and offline replay"). ~4/26 = 0.15. Already inside `mod-103-trajectory-and-tool-eval` under deterministic replay + agent-harness authoring. Do not spin out.
+- **Coding-agent-specific eval** — OpenTrain AI, Cursor, Phizenix. ~3/26 = 0.12. Already covered by mod-103's SWE-bench Verified / BFCL / τ-bench shape templates and by the tool-call scoring exercise.
+- **Cost / latency / quality trade-off eval** — Glean, Firecrawl, Cursor. ~3/26 = 0.12. Already the exact scope of `mod-111-cost-latency-quality-tradeoff`. Below threshold this cycle, but the theme is load-bearing in build-vs-buy discussions and shows up implicitly in most postings — do not demote.
+- **Trace instrumentation** — 4/26 = 0.15 explicit mentions. This is under-counted because most postings phrase it generically ("evaluation frameworks", "observability tools") rather than naming the OTel / OpenInference stack. It is a hard prerequisite for the trajectory / online / regression themes, so `mod-102` stays.
+- **Cyber-evaluation of AI** — Anthropic Cyber Evaluations Engineer (1/26 in-window). Specialist adjacent to `mod-108`; the *deep* security shape is owned upstream by `ai-infra-security-learning` (level 35). Do not spin out.
+- **Domain-vertical eval templates (health, legal, fintech, life-sciences)** — Hippocratic AI, Phizenix, Appnovation, Distyl, Notion, NCS. Domain vertical is the *context* of the eval, not a distinct requirement — the underlying skills are already covered by the existing modules and the projects already ask learners to instantiate them on a specific product surface.
 
 ## Posting evidence
 
-<!-- needs-research: populate with the ≥25 in-window postings sampled next cycle. Use the same table shape as `agentic-ai-engineer-learning/JOB_REQUIREMENTS.md`. -->
+The 26 in-window postings sampled this cycle. See [`.aicg/job-requirements.json → postings`](.aicg/job-requirements.json) for the full verbatim record.
 
-No postings were sampled this cycle. See the **Status** section above for the reason. The next autonomous research cycle should fan out across:
-
-- **ATS aggregators** — `boards.greenhouse.io`, `jobs.lever.co`, `jobs.ashbyhq.com`, `app.workable.com`, `myworkdayjobs.com`, `smartrecruiters.com`.
-- **Frontier-lab AI-application teams** — OpenAI (Applied AI / product eval), Anthropic (Applied AI / product eval), Google DeepMind (product eval), Meta GenAI, Microsoft AI, Apple AIML, Amazon AGI, Salesforce AI, NVIDIA (product / applied), xAI, Reka, Character.AI. Reject pre-training / capability-eval roles at these employers — those belong to `model-evaluation-engineer`.
-- **Eval-tooling employers** — Braintrust, Arize AI (Phoenix), Weights & Biases (Weave), Langfuse, Confident-AI (DeepEval), Promptfoo, Patronus, Galileo, Humanloop, LangChain (LangSmith), LlamaIndex, TruLens, Snorkel, Argilla, Cleanlab, Lakera.
-- **Applied AI product companies** — Notion AI, Duolingo AI, Klarna, Perplexity, Harvey, Sierra, Glean, Hebbia, Cursor, Codeium, Windsurf, Cognition, Adept, Character.AI, Inflection, You.com.
-- **Hyperscaler managed-eval product teams** — Vertex AI Gen AI Evaluation (Google), Azure AI Foundry Evaluation (Microsoft), AWS Bedrock Model Evaluation.
-- **Enterprise AI teams** — JPMorgan AI, Bloomberg AI, Bank of America, ServiceNow AI, Adobe Sensei / Firefly, Salesforce Einstein Trust.
-- **Domain-specialist applied-AI teams** — Included Health, Ambience, Nuance / DAX (Microsoft), Robin AI, EvenUp, Casetext (Thomson Reuters), Harvey, Osmo, Genesys AI, Zendesk AI.
-- **Public-sector adjacent** — UK AI Safety Institute product evaluations, US AI Safety Institute applied evaluations (only when the posting is app-shaped, not model-shaped).
-
-For each posting, capture employer, exact title, URL, `date_observed`, `date_posted` (or `estimated:2026-MM`), location, 5–10 verbatim requirement bullets, 2–6 preferred-qualification bullets, salary range when published, and one short representative quote. Filter out:
-
-- **Senior / Staff / Principal modifiers** — those inherit this packet upward.
-- **Model-eval methodology postings** (benchmark construction, statistical rigour, multi-modality model-eval architecture) — those belong to `model-evaluation-engineer` at the same level.
-- **Governance-shaped postings** (audit trails, regulator interface, release governance as an assurance program) — those belong to `ai-evaluation-engineer` (level 25, Governance family).
-- **Generic ML Engineer / Data Scientist / Research Scientist titles** — those are owned by `ml-engineer`, `senior-ml-engineer`, and research-scientist peers.
-- **Pure infra / platform titles** — those belong to `training-pipeline-engineer` and `ai-infra-ml-platform`.
+| # | Employer | Title | Salary (USD) | Requirements evidence for |
+|---|---|---|---|---|
+| 1 | Phizenix | [LLM / Agentic Evaluation Rig Engineer](https://job-boards.greenhouse.io/phizenix/jobs/5398766008) | — | mod-101, mod-103, mod-104, mod-105, mod-106, mod-107 |
+| 2 | Anthropic | [Cyber Evaluations Engineer](https://job-boards.greenhouse.io/anthropic/jobs/5406367008) | $300k–$405k | mod-108, mod-112 |
+| 3 | Cursor (Anysphere) | [Software Engineer, Agent Evaluation and Quality](https://cursor.com/careers/software-engineer-agent-evaluation-and-quality) | — | mod-101, mod-102, mod-103, mod-106, mod-107, mod-110, mod-112 |
+| 4 | Glean | [Software Engineer, Evals](https://job-boards.greenhouse.io/gleanwork/jobs/4712438005) | — | mod-102, mod-103, mod-107, mod-110, mod-112 |
+| 5 | Hippocratic AI | [AI Engineer - Evaluations](https://builtin.com/job/ai-engineer-evaluations/7559809) | — | mod-101, mod-103, mod-104, mod-106, mod-108, mod-109, mod-110, mod-112 |
+| 6 | ServiceNow | [Machine Learning Quality Engineer](https://builtin.com/job/machine-learning-quality-engineer/6607682) | $124k–$192k | mod-101, mod-104, mod-106, mod-108 |
+| 7 | Appnovation Technologies | [AI Evaluation Engineer (QA)](https://job-boards.greenhouse.io/appnovation/jobs/8743206002) | — | mod-101, mod-105, mod-106, mod-109, mod-110 |
+| 8 | WITHIN | [AI Engineer](https://job-boards.greenhouse.io/agencywithin/jobs/5056863007) | $90.9k–$254.1k | mod-101, mod-103, mod-105, mod-106 |
+| 9 | OpenTrain AI | [Python Engineer, AI Coding Agent Evaluation](https://www.opentrain.ai/jobs/python-engineer-ai-coding-agent-evaluation--cmtfopkq0000j0akoeodsq186/) | — | mod-103, mod-109 |
+| 10 | Future | [Applied AI Engineer](https://job-boards.greenhouse.io/future/jobs/4683133005) | $215k–$250k | mod-102, mod-104, mod-106, mod-110 |
+| 11 | CI&T | [AI Agent Evaluation Engineer (Senior, QA)](https://jobs.lever.co/ciandt/1e06dadb-5342-470d-a9a1-cb42755381a2) | — | mod-102, mod-103, mod-104, mod-105, mod-109 |
+| 12 | GovWorx | [AI Evaluation Engineer](https://jobs.ashbyhq.com/govworx/7bad3c33-9ad1-45e3-bf15-4c2de306e671) | — | mod-101, mod-106, mod-107 |
+| 13 | Distyl AI | [AI Evaluation Engineer (A)](https://jobs.ashbyhq.com/Distyl/b0bb160e-498d-4f32-baaa-3b4974a3cbf2) | — | mod-101, mod-106, mod-107, mod-110 |
+| 14 | Distyl AI | [AI Evaluation Engineer (B)](https://jobs.ashbyhq.com/Distyl/75003495-773a-4b3d-99f2-a8976c40012f) | — | mod-101, mod-106, mod-110 |
+| 15 | Notion | [User Researcher, AI Evaluations](https://careercenter.americananthro.org/job/715145/user-researcher-ai-evaluations/) | $196k–$230k | mod-101, mod-104, mod-107, mod-109 |
+| 16 | Coupa Software | [AI Engineer, Evaluation & Quality](https://jobs.lever.co/coupa/0e7ed42f-a206-4ea6-afe6-4e312b1f7046) | — | mod-106, mod-107, mod-110 |
+| 17 | Nous Research | [Machine Learning Engineer, Evals](https://jobs.ashbyhq.com/nous-research/1e647dc1-e69c-4764-8a02-7244b8faee0b) | — | mod-104, mod-110 |
+| 18 | Exa | [ML Evals Engineer](https://jobs.ashbyhq.com/exa/9c45a74e-d507-482a-bc0e-da2f464c9767) | — | mod-105, mod-110 |
+| 19 | Thinking Machines Lab | [Software Engineer, Evaluation Platform / Infra](https://jobs.ashbyhq.com/thinkingmachines/9d863c78-80c0-44cd-a574-d1330e125398) | — | mod-110, mod-112 |
+| 20 | White Circle | [Research Engineer (Evals)](https://jobs.ashbyhq.com/whitecircle/07d24ec8-117f-4849-8dd5-2c2bc2cfbb40) | — | mod-103, mod-108 |
+| 21 | OpenAI | [Backend Software Engineer (Evals)](https://jobs.ashbyhq.com/openai/3d064454-c0c3-4225-bc2c-6d8c0f8735b2) | — | mod-101, mod-107, mod-110 |
+| 22 | Firecrawl | [Research Engineer – Evals](https://jobs.ashbyhq.com/firecrawl/25092c0e-9a32-4191-af79-050738213704) | $160k–$240k | mod-101, mod-106, mod-110, mod-112 |
+| 23 | HackerRank | [Machine Learning Engineer, Evaluation](https://wellfound.com/jobs/4079979-2-machine-learning-engineer-evaluation) | — | mod-104, mod-106, mod-107 |
+| 24 | Precept Labs | [ML Engineer — Applied LLM / Agents (Contract)](https://wellfound.com/jobs/4532099-machine-learning-engineer-applied-llm-agents-contract) | — | mod-103, mod-106, mod-107, mod-110 |
+| 25 | Atlassian | [Machine Learning Engineer, AI Evaluation (Rovo Chat)](https://builtin.com/jobs/data-analytics/machine-learning) | — | mod-101, mod-106, mod-110, mod-112 |
+| 26 | NCS | [LLM / AI Quality Engineer](https://jobs.smartrecruiters.com/NCS3/6000000000955545--eg-llm-ai-quality-engineer) | — | mod-101, mod-103, mod-105, mod-108, mod-112 |
 
 ## Ownership map — quick reference for next cycle
 
@@ -104,7 +116,7 @@ When backfilling postings, use this ownership decision to keep the curriculum fr
 - **Senior ML Engineer** (level 30, generalist peer) — consumes this curriculum's eval methodology in product-team ML release reviews.
 - **Staff / Principal / Senior Agentic AI / Agentic Systems Architect** (level 40+) — inherit this packet for architectural and cross-team scope.
 - **Head of AI Governance** (level 40, Governance family) — consumes eval evidence in board-level reporting.
-- **AI Infra Security** (level 35) — owns deep AI/ML security (eval-set exfiltration, judge supply-chain, adversarial-eval depth); surfaced as awareness only.
+- **AI Infra Security** (level 35) — owns deep AI/ML security (eval-set exfiltration, judge supply-chain, adversarial-eval depth); surfaced as awareness only. Anthropic's Cyber Evaluations Engineer posting sits at the boundary.
 
 ## Differentiation versus the three peer "eval" tracks
 
