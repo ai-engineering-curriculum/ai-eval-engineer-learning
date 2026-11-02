@@ -8,4 +8,3 @@
 | (planned) | TBD | Lessons drafted for mod-105 → mod-108 (RAG + CI/CD + online + safety). |
 | (planned) | TBD | Lessons drafted for mod-109 → mod-112 (human review + platform + trade-off + ownership). |
 | (planned) | TBD | Project READMEs drafted: 101 product-agent trajectory capstone, 102 eval-gated release pipeline, 103 AI eval platform slice. |
-| (planned) | TBD | First cohort run; rubric and pacing feedback folded back into `.aicg/curriculum-plan.json`. |
