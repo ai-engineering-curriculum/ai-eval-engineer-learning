@@ -1,21 +1,55 @@
-# mod-109-human-review-workflows: Human Review Workflows for AI Product Teams
-
-> Scaffolded by `aicg org execute-plan`. Lecture chapters and exercise content are authored on subsequent autonomous cycles.
+# mod-109 — Human Review Workflows for AI Product Teams
 
 **Estimated effort:** 10 hours
 
+This is the ninth module of the AI Evaluation Engineer track. It builds the *human-in-the-loop* half of the eval program — the expert-review workbench, the user-feedback triage pipeline, the inter-annotator-agreement discipline, the gold-set rotation cadence, and the vendor-vs-in-house decision that keeps the automated eval machinery honest.
+
+Mod-104 ends with a judge-tier router that defers uncertain cases to a human. Mod-107 ends with an online loop whose alerts the on-call runbook cannot always resolve. Mod-108 ends with a safety-eval runbook whose surviving items need expert adjudication. All three queues land here. Without a running human-review workflow, judge calibration ages out, drift alerts accumulate without disposition, and safety-eval findings sit in a spreadsheet. The job of this module is to make human review a *product-scale system* — queues with owners, schemas with versions, SLAs with budgets, agreement statistics the eval team actually computes — rather than a weekly "someone should look at these."
+
+The module scopes to *product-side* human-review work: standing up Argilla / Label Studio against your trace store, capturing and deduplicating end-user thumbs-up / down and structured feedback, computing practical agreement statistics at product cadence, rotating gold sets as the surface changes, and choosing between hiring a vendor review team and building one in-house. Full methodology depth — inter-rater reliability theory, benchmark construction, variance-decomposition of label noise, judge-vs-human calibration methodology — is deferred to the `model-evaluation-engineer` peer (Model-Development family, level 30); chapters 04 and 06 are the escalation contracts.
+
 ## Learning objectives
 
-- Stand up an expert-review workflow in Argilla or Label Studio and integrate it with the trace store
-- Capture thumbs-up/down and structured feedback from real users, dedupe it, and route it into an evaluation dataset with owner-assigned triage
-- Compute practical inter-annotator agreement (Cohen's / Fleiss' kappa) at product scale — enough to decide whether a rubric is stable, and know when to escalate to `model-evaluation-engineer` for methodology depth
-- Rotate gold sets in step with product-surface changes so drift does not silently erode the offline suite
-- Choose vendor vs. in-house review for a given surface with data-residency, latency, and cost trade-offs explicit — deferring vendor-methodology depth to `model-evaluation-engineer`
+- Stand up an expert-review workflow in Argilla or Label Studio and integrate it with the trace store so every reviewed item carries lineage back to the span it came from.
+- Capture thumbs-up / thumbs-down and structured feedback from real users, deduplicate it, and route it into an evaluation dataset with owner-assigned triage, severity, and an SLA.
+- Compute practical inter-annotator agreement (Cohen's / Fleiss' kappa, Krippendorff's alpha for ordinal rubrics) at product scale — enough to decide whether a rubric is stable, and know when to escalate to `model-evaluation-engineer` for methodology depth.
+- Rotate gold sets in step with product-surface changes so drift does not silently erode the offline suite, and keep a sealed snapshot of every prior gold so the old numbers remain reproducible.
+- Choose vendor vs. in-house review for a given surface with data-residency, latency, cost-per-label, and PII-handling trade-offs made explicit — deferring vendor-methodology depth to `model-evaluation-engineer`.
 
-## Structure
+## Lecture chapters
 
-- `01-…md` … `0N-…md`: lecture chapters.
-- `exercises/`: per-exercise prompts.
-- `labs/`: long-form hands-on labs.
-- `quizzes/`: knowledge checks.
-- `resources.md`: external references.
+1. [Why human review, and where it fits in the eval loop](01-why-human-review.md) — the three inbound queues (mod-104 judge disagreements, mod-107 online-loop alerts the runbook cannot resolve, mod-108 safety-eval surviving items); the four outbound artefacts (labelled calibration data, owner-assigned triage items, rotated gold sets, eval-program cost input); vocabulary the module fixes (*expert review*, *user feedback*, *review queue*, *gold set vs calibration set*, *inter-annotator agreement*, *rubric stability*, *SLA*); the delegation boundary to `model-evaluation-engineer` for full methodology depth.
+2. [Expert-review workflows in Argilla and Label Studio](02-expert-review-workbench.md) — the review-workbench surface and what it has to do for a product team; schema design (the labelled-row shape that both tools export cleanly); trace-store integration (every reviewed item carries `trace_id`, `span_id`, `model_version`, `prompt_hash`, `retriever_hash`, `decoding_seed` — lineage, not just the string); reviewer rota, SLA, and backlog pressure; export back into the mod-110 eval data platform; the trade-offs between the two tools and the hosted-vs-OSS choice.
+3. [Capturing, deduplicating, and triaging user feedback](03-user-feedback-triage.md) — the thumbs-up / down widget, the structured feedback form, and the free-text report; the dedup layer (near-duplicate detection on prompt + response, canonicalised reports, per-session collapse); routing into an eval dataset with per-surface owner; severity assignment and the on-call / eval-eng / PM ownership split; the "feedback that is not an eval signal" filter (bug reports, feature requests, abuse); the loop back to the online eval dashboards from mod-107.
+4. [Practical inter-annotator agreement at product scale](04-practical-iaa.md) — *when* to compute IAA (rubric change, judge re-calibration, new reviewer onboarding, gold-set rotation) and when not; Cohen's kappa for two reviewers on nominal rubrics; Fleiss' kappa for three or more reviewers; Krippendorff's alpha for ordinal rubrics and for missing labels; interpretation thresholds; the rubric-stability decision ("ship the rubric", "revise the rubric", "escalate to peer"); the quick-method / full-method split with `model-evaluation-engineer` (this module does enough to decide; the peer does the full variance decomposition and the power analysis).
+5. [Gold-set rotation with product-surface change](05-gold-set-rotation.md) — why gold sets drift (new product features, new surfaces, model upgrades, policy updates, taxonomy shifts); the rotation cadence tied to the mod-106 release calendar and the mod-107 drift-monitor alerts; the diff between a frozen gold (for reproducing a historical number) and a rolling gold (for the current release); sealed snapshots and the lineage columns that make the old number re-runnable; the human-review step that approves each rotation; coordination with the mod-104 calibration set and the mod-108 safety set.
+6. [Vendor vs. in-house review, and the hybrid](06-vendor-vs-in-house.md) — the trade-off matrix (cost per label, latency to first label, data-residency, PII and consent posture, vertical / language coverage, operator control, exit cost); a vendor landscape survey (Scale AI, Surge AI, Labelbox, Appen, iMerit, Toloka, Prolific) read as *shape templates* rather than endorsements; the in-house build-cost; the hybrid pattern most product teams converge to (in-house experts own the rubric and the gold; vendor pool runs the high-volume labelling); the delegation to `model-evaluation-engineer` for vendor-methodology depth (how the vendor validates its own labellers, how it reports IAA back, how it audits label noise).
+
+## Exercises
+
+Each exercise builds on the last. Do them in order and keep the outputs — the artefacts (an Argilla or Label Studio project wired to the trace store, a user-feedback triage pipeline, a per-rubric IAA report, a rotated gold set with sealed snapshots) are the deliverables mod-110 – mod-112 will assume you have.
+
+1. [Expert review in Argilla or Label Studio](exercises/exercise-01-expert-review-in-argilla-or-label-studio.md) — stand up a review project against your mod-102 trace store, import a judge-disagreement queue from mod-104, define the labelled-row schema with lineage columns, and run two reviewers over a seed set.
+2. [User-feedback triage pipeline](exercises/exercise-02-user-feedback-triage-pipeline.md) — wire the thumbs-up / down and structured-feedback capture into the mod-102 span schema, build the dedup layer, and route triaged items into the eval dataset with owner, severity, and SLA fields.
+3. [Practical inter-annotator agreement at product scale](exercises/exercise-03-practical-iaa-at-product-scale.md) — compute Cohen's / Fleiss' kappa (and Krippendorff's alpha for one ordinal rubric) on the exercise-01 reviewed set, interpret the result with a bootstrap CI, and decide whether to ship, revise, or escalate the rubric.
+4. [Gold-set rotation driven by a surface change](exercises/exercise-04-gold-set-rotation-with-surface-change.md) — simulate a product-surface change (a new tool, a new policy category, a model upgrade), rotate the gold set with reviewer approval, snapshot the prior gold with its lineage columns, and confirm the old mod-106 report re-runs bit-identically against the snapshot.
+
+## Labs and quizzes
+
+- Labs (see [`labs/`](labs)) build an end-to-end human-review reference on top of the mod-102 instrumented backend, the mod-104 judge pipeline, and the mod-107 online-eval loop: the review workbench, the feedback-triage pipeline, the IAA report job, the gold-set rotation playbook, and the vendor-vs-in-house decision memo. Authored under the autonomous fill-in loop.
+- Quizzes (see [`quizzes/`](quizzes)) verify the vocabulary — the three inbound queues, the four outbound artefacts, the expert-review-vs-user-feedback split, the kappa / alpha choice, the frozen-vs-rolling gold distinction, and the vendor-vs-in-house trade-off axes. Authored under the autonomous fill-in loop.
+
+## Resources
+
+External references are curated in [`resources.md`](resources.md).
+
+## Where this module hands off
+
+- **Judge calibration** reads the reviewed set out of chapter 02's workbench as the human gold for mod-104's quick-calibration step, and consumes the chapter 04 kappa as the rubric-stability signal → [`mod-104-llm-as-judge-in-product`](../mod-104-llm-as-judge-in-product).
+- **Online eval and regression** consumes the triage-queue disposition rate (and the time-to-first-review SLA) as a loop-health metric on the safety-reviewer dashboard, and feeds reviewed items back into the sampled-trace store → [`mod-107-online-eval-and-regression`](../mod-107-online-eval-and-regression).
+- **App-side safety and guardrail eval** routes its surviving runbook items into this module's expert-review queue with the OWASP / ATLAS / SAIF tag preserved, and consumes the review verdict as the escalation signal → [`mod-108-app-safety-and-guardrails-eval`](../mod-108-app-safety-and-guardrails-eval).
+- **Eval-data platform** stores the reviewed rows, the feedback-triage items, the IAA reports, and the gold-set snapshots as first-class tables with full lineage → [`mod-110-eval-data-platform-slice`](../mod-110-eval-data-platform-slice).
+- **Cost / latency / quality trade-off** reads the per-label cost from chapter 06 (both in-house seat cost and vendor rate-card cost) into the product cost model, and treats time-to-first-review as a latency line item on the review path → [`mod-111-cost-latency-quality-tradeoff`](../mod-111-cost-latency-quality-tradeoff).
+- **Program-owner posture** treats the review workbench, the triage pipeline, the IAA cadence, the gold-rotation playbook, and the vendor-vs-in-house decision memo as load-bearing artefacts of the release-gate-plus-online-monitor architecture, and defends them to the Governance-family peer → [`mod-112-owning-an-ai-eval-program`](../mod-112-owning-an-ai-eval-program).
+- **Escalation to the Model-Development-family `model-evaluation-engineer` peer** for full-methodology inter-rater reliability (variance decomposition, power analysis, unequal-interval ordinal analysis) and for vendor-methodology audits (how the vendor validates its own labellers and reports label noise back) when the product-altitude work in chapters 04 and 06 is not enough.
+- **Escalation to the `ai-risk-engineer` peer** for harm-model-side review of safety items that chapter 03's triage flags as adversary-persona-relevant rather than product-quality-relevant; this module runs the queue, the peer owns the harm model.
