@@ -2,14 +2,14 @@
 
 AI Engineering Curriculum · Level 30 · [learning](https://github.com/ai-engineering-curriculum/ai-eval-engineer-learning) · [solutions](https://github.com/ai-engineering-curriculum/ai-eval-engineer-solutions)
 
-_Generated 2026-11-08 by `aicg org completeness`._
+_Generated 2026-11-15 by `aicg org completeness`._
 
-**Overall: 54%**
+**Overall: 67%**
 
 | | Progress | Count |
 |---|---|---|
 | Learning | `█████████░` 92% | 11/12 modules complete |
-| Solutions | `██░░░░░░░░` 17% | 10/58 exercises solved |
+| Solutions | `████░░░░░░` 43% | 25/58 exercises solved |
 
 ## Modules
 
@@ -21,10 +21,10 @@ _Generated 2026-11-08 by `aicg org completeness`._
 | `mod-104-llm-as-judge-in-product` | ✅ Complete | 19,272 | 5 | 5 | — | 0/5 |
 | `mod-105-rag-eval-app-layer` | ✅ Complete | 18,398 | 5 | 4 | — | 0/4 |
 | `mod-106-eval-gated-cicd` | ✅ Complete | 23,125 | 6 | 5 | — | 0/5 |
-| `mod-107-online-eval-and-regression` | ✅ Complete | 27,873 | 7 | 6 | — | 0/6 |
+| `mod-107-online-eval-and-regression` | ✅ Complete | 27,873 | 7 | 6 | — | 6/6 |
 | `mod-108-app-safety-and-guardrails-eval` | ✅ Complete | 31,869 | 7 | 5 | — | 0/5 |
-| `mod-109-human-review-workflows` | 🟡 Skeleton | 1,753 | 0 | 4 | — | 0/4 |
-| `mod-110-eval-data-platform-slice` | ✅ Complete | 37,226 | 7 | 5 | — | 0/5 |
+| `mod-109-human-review-workflows` | 🟡 Skeleton | 1,753 | 0 | 4 | — | 4/4 |
+| `mod-110-eval-data-platform-slice` | ✅ Complete | 37,226 | 7 | 5 | — | 5/5 |
 | `mod-111-cost-latency-quality-tradeoff` | ✅ Complete | 37,357 | 7 | 5 | — | 0/5 |
 | `mod-112-owning-an-ai-eval-program` | ✅ Complete | 44,751 | 7 | 5 | — | 0/5 |
 
