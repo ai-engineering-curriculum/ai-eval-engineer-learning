@@ -119,7 +119,7 @@ Worked example: `R = 10 rps, p = 0.01, M = 3, f_OSS = 0.85, f_mid = 0.10, f_fron
 - Sampled traces / day = `10 × 0.01 × 86400 = 8 640`.
 - Judge calls / day = `8 640 × 3 = 25 920`.
 - Mean $ / call = `0.85 × 0.0002 + 0.10 × 0.005 + 0.05 × 0.05 = 0.00317`.
-- $ / day = `25 920 × 0.00317 ≈ $82`; $ / month ≈ `$2 460`.
+- $ / day = `25 920 × 0.00317 ≈ $82`, so $ / month ≈ $2 460.
 
 The three levers are `p`, tier fractions, and `M`. When you cannot afford $2 460 / month:
 
