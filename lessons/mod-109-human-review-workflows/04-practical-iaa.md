@@ -47,11 +47,11 @@ Three product-altitude properties to know:
 
 When three or more reviewers label the same row, Cohen's κ no longer applies (it is pairwise). Fleiss' κ generalises to any number of reviewers.
 
-- Each row has `n` reviewer verdicts (not necessarily the same `n` across rows; Fleiss handles the ragged case).
+- Each row has `n` reviewer verdicts; standard Fleiss' κ, and the `statsmodels.stats.inter_rater.fleiss_kappa` implementation specifically, requires the same `n` on every row. If the senior reviewer samples a subset of the primary reviewers' rows, the resulting table is ragged — the senior-reviewed subset has `n = 3`, the rest has `n = 2` — and Fleiss on the mixed table either asserts out (statsmodels) or returns a number that is not comparable across rows.
 - The statistic reads `p_o` as the mean per-row agreement across all reviewer pairs and `p_e` as the expected chance agreement given the overall label distribution.
 - Interpretation is the same scale as Cohen's κ; do not re-scale when switching from two to three reviewers.
 
-Fleiss' κ is the default when the rota (chapter 02) runs two primary reviewers plus a secondary senior reviewer who reads a sample. The three-reviewer κ on the sample is a more conservative stability signal than the two-reviewer κ on the full set.
+Fleiss' κ is the default when three or more reviewers each label the same rows. In the rota (chapter 02) where two primary reviewers cover the full set and a senior reviewer reads a sample, compute Fleiss' κ on the fully-overlapped senior-reviewed subset only; for the ragged full table, switch to Krippendorff's α (next section), which handles the missing-label case cleanly. The three-reviewer κ on the sample is a more conservative stability signal than the two-reviewer κ on the full set.
 
 The implementation lives in `statsmodels.stats.inter_rater.fleiss_kappa` <!-- needs-research: re-verify the current statsmodels module path at https://www.statsmodels.org/stable/ --> or in `krippendorff` (which also computes Fleiss as a degenerate case).
 

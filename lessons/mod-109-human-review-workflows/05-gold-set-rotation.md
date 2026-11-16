@@ -61,7 +61,7 @@ A rotation is a six-step procedure, run per surface, per rubric.
 
 Two disciplines make the rotation defensible:
 
-- **The new gold passes the old numbers with an explainable delta.** If the mod-106 release-gate number moves by more than the rubric-stability CI (chapter 04's bootstrap), the rotation is the likely cause — re-examine the new rows. A gold rotation should not silently move the top-line number.
+- **The new gold passes the old numbers with an explainable delta.** Bootstrap the mod-106 release-gate score itself on the new gold — resample rows with replacement, recompute the score per resample, take the 2.5 / 97.5 percentiles — to get a CI on the release-score. Chapter 04's κ / α CI quantifies reviewer-agreement sampling variance and is not a valid threshold for a release-score shift; the two bootstraps measure different things. If the release-gate score delta between the old and new gold exceeds the release-score CI, the rotation materially moved the top-line number — re-examine the new rows. A gold rotation should not silently move the top-line number.
 - **The retired rows do not disappear.** Rows in the old gold that no longer apply (e.g. a feature that was removed) are not deleted; they are sealed in the prior frozen snapshot and archived. The sealed snapshot is complete even for retired rows.
 
 ### Sealed snapshots — the lineage columns and the re-run
