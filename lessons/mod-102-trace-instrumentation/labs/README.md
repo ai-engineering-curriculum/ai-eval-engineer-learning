@@ -1,5 +1,7 @@
 # Labs for mod-102-trace-instrumentation (Trace-Level Instrumentation for LLM Apps and Agents)
 
-Planned labs:
+The labs stand up the end-to-end instrumented reference app that `mod-106` wires into CI and `mod-107` runs the sampled-eval loop against. They build on each other: lab-01 produces the instrumented surface, lab-02 walks a bad run against a canned trace in that shape, and lab-03 fronts the same surface with the Collector recipe from chapter 06.
 
-- `lab-01` — lab-01
+- [`lab-01-instrumented-reference-app.md`](lab-01-instrumented-reference-app.md) — build a stubbed support-agent surface (plan LLM → retriever → tool → reply LLM → guardrail) that emits six OpenInference-shaped spans via the `ConsoleSpanExporter`. A checker script verifies the trace answers chapter 01's five debugger questions and that the per-kind MUSTs from chapter 04 are present. Runs offline with no API keys. 60–90 min.
+- [`lab-02-six-step-bisection-walkthrough.md`](lab-02-six-step-bisection-walkthrough.md) — execute chapter 05's six-step bisection against a canned bad-run trace (digit-transposition on tool-call arguments). Small Python helper prints the root attributes and the ordered child-span sequence; you write the bisection report, save a reproducer fixture, and name one missed-signal attribute. 45–60 min.
+- [`lab-03-collector-tail-sampling-and-pii-scrubbing.md`](lab-03-collector-tail-sampling-and-pii-scrubbing.md) — run an OpenTelemetry Collector locally with the chapter-06 processor pipeline (`attributes → redaction → tail_sampling → batch`). Fire 25 seeded spans through it and grep the file-exporter sink to confirm each tail policy kept what the policy promised and each scrubber stripped what it promised. 75–90 min.
