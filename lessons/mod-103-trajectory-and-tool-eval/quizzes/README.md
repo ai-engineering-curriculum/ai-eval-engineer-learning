@@ -1,3 +1,3 @@
 # Trajectory and Tool-Call Evaluation for Production Agents quizzes
 
-Authored under the autonomous fill-in loop.
+- [`quiz-01-trajectory-and-tool-eval.md`](quiz-01-trajectory-and-tool-eval.md) — 21 multiple-choice questions covering chapters 01–07 (trajectory vocabulary and the five trajectory questions, reference-trajectory forms and the five-level argument-match ladder, the ordering matchers with `graphlib.TopologicalSorter`, the final-answer methods and the `answer_credit` / `groundedness_credit` split, the partial-credit rubric with pre-registered weights and floors, the four budget families and the `min`-across-families `budget_credit`, Inspect's five primitives and the pure-Scorer stack, the seven public benchmarks as shape templates, and the six replay pins + the six-step post-mortem workflow). Answer key with per-question chapter citations at the bottom of the file.
