@@ -1,3 +1,3 @@
-# LLM-as-Judge in Product Pipelines: Rubrics, Bias Controls, and Judge-Tier Routing quizzes
+# Quizzes for mod-104-llm-as-judge-in-product (LLM-as-Judge in Product Pipelines: Rubrics, Bias Controls, and Judge-Tier Routing)
 
-Authored under the autonomous fill-in loop.
+- [`quiz-01-llm-as-judge-in-product.md`](quiz-01-llm-as-judge-in-product.md) — 15 multiple-choice questions across chapters 01–05: rubric anatomy (absolute and pairwise) and anchor design (ch 01); the three documented biases and their canonical mitigations (ch 02); G-Eval, framework choice, and when to switch to an OSS judge (ch 03); calibration gold-set sizing, statistic choice, and the escalation contract with the `model-evaluation-engineer` peer (ch 04); three-tier routing, the four sources of judge drift, and the frontier-upgrade playbook (ch 05).
