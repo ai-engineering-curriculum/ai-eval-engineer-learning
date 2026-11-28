@@ -1,3 +1,3 @@
-# RAG Evaluation at the Application Layer quizzes
+# Quizzes for mod-105-rag-eval-app-layer (RAG Evaluation at the Application Layer)
 
-Authored under the autonomous fill-in loop.
+- [`quiz-01-rag-eval-app-layer.md`](quiz-01-rag-eval-app-layer.md) — 16 multiple-choice questions across chapters 01–05: the four triad metrics (faithfulness, answer relevancy, context precision / recall) and their documented failure modes plus the RAGAS / TruLens / DeepEval framework split (ch 01); why the triad alone does not attribute, the retrieval-only metrics (recall@k, MRR, hit rate), fixed-context replay, and the four-outcome attribution decision tree (ch 02); product-shaped suite design, the three signature slices (distractor documents / out-of-scope queries / hallucination-tempting prompts), and the real-vs-synthetic query sourcing rule (ch 03); noise sensitivity, context utilisation, answer completeness, and refusal quality as diagnostics that catch silent regressions the triad aggregates miss (ch 04); and the scope contract with the `rag-engineer` peer, including the mirror anti-patterns both sides must avoid (ch 05).
